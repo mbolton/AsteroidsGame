@@ -1,27 +1,20 @@
-﻿Build started 5/13/2014 1:34:32 PM.
-     1>Project "C:\Users\Marcus\AsteroidsGame\AsteroidsGame.vcxproj" on node 2 (build target(s)).
+﻿Build started 5/15/2014 3:42:12 PM.
+     1>Project "C:\Users\aduvall\git\AsteroidsGame\AsteroidsGame.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Release\AsteroidsGame.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDOWS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
-         main.cpp
+         All outputs are up-to-date.
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Marcus\AsteroidsGame\Release\AsteroidsGame.exe" /INCREMENTAL /NOLOGO alld.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\AsteroidsGame.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Marcus\AsteroidsGame\Release\AsteroidsGame.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Marcus\AsteroidsGame\Release\AsteroidsGame.lib" /MACHINE:X86 Release\AsteroidsGame.exe.embed.manifest.res
-         Release\main.obj
-     1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/OPT:ICF' specification
+         All outputs are up-to-date.
        Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Release\AsteroidsGame.exe.embed.manifest" /manifest Release\AsteroidsGame.exe.intermediate.manifest
          All outputs are up-to-date.
-       LinkEmbedManifest:
-         All outputs are up-to-date.
-         AsteroidsGame.vcxproj -> C:\Users\Marcus\AsteroidsGame\Release\AsteroidsGame.exe
        FinalizeBuildStatus:
          Deleting file "Release\AsteroidsGame.unsuccessfulbuild".
          Touching "Release\AsteroidsGame.lastbuildstate".
-     1>Done Building Project "C:\Users\Marcus\AsteroidsGame\AsteroidsGame.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\aduvall\git\AsteroidsGame\AsteroidsGame.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.23
+Time Elapsed 00:00:00.06
