@@ -1,4 +1,4 @@
-﻿Build started 5/15/2014 3:42:12 PM.
+﻿Build started 5/16/2014 11:45:26 AM.
      1>Project "C:\Users\aduvall\git\AsteroidsGame\AsteroidsGame.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Release\AsteroidsGame.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -17,4 +17,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.06
+Time Elapsed 00:00:00.05
