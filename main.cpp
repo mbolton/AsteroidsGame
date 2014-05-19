@@ -6,9 +6,6 @@ int main(void){
 	BITMAP *background;
 	BITMAP *buffer;
 
-	int shipX;
-	int shipY;
-
 	/*** Initialized the program and creates a window with the set background ***/
 	allegro_init();
 	install_keyboard();
@@ -29,26 +26,24 @@ int main(void){
 	}
 	buffer = create_bitmap_ex(32, SCREEN_W, SCREEN_H);                // Creates the buffer for the game to display changes to.
 
-	shipX = SCREEN_W/2;
-	shipY = SCREEN_H/2;
 	ship gameShip;
 
 	blit(background, buffer, 0,0,0,0, background->w, background->h);
-	//draw_trans_sprite(buffer, shipImage, shipX, shipY);
+	//draw_trans_sprite(buffer, gameShip.shipImage, shipX, shipY);
 	
 	while(!key[KEY_ESC])
 	{
 		if(keypressed())
 		{
 			/*if(key[KEY_W])
-				gameShip.goForward(); 
+				gameShip.goForward(); */
 			if(key[KEY_A])
-				gameShip.turnLeft();
-			if(key[KEY_D])
+				gameShip.turnLeft(buffer);
+			/*if(key[KEY_D])
 				gameShip.turnRight(); */
-			exit(0);
-		}
-
+		} 
+		
+		gameShip.refreshShip(background, buffer);
 		acquire_screen();
 		blit(buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
 		release_screen();
