@@ -1,21 +1,20 @@
 #include <allegro.h>	
 #include <math.h>
 #include "ship.h"
-int main(){
+int main(void){
 	 
 	BITMAP *background;
-	BITMAP *ship;
 	BITMAP *buffer;
 
 	int shipX;
 	int shipY;
 
+	/*** Initialized the program and creates a window with the set background ***/
 	allegro_init();
 	install_keyboard();
-
-	/*** Creates a window with the set background ***/
 	set_color_depth(32);
 	set_alpha_blender();
+
 	if (set_gfx_mode(GFX_AUTODETECT_WINDOWED, 1280, 720, 0, 0) != 0)  // Attempts to set the graphic mode.
 	{
 		allegro_message("Error! Can not set graphic mode!"); 
@@ -28,29 +27,27 @@ int main(){
 		allegro_message("Error! Unable to load background!");
 		exit(0);
 	}
-
-	ship = load_tga("ship3.tga", NULL);
-	if (!ship)                                                        // Attempts to load the ship image.
-	{
-		allegro_message("Error! Unable to load ship!");
-		exit(0);
-	} 
-	buffer = create_bitmap_ex(32, SCREEN_W, SCREEN_H);                       // Creates the buffer for the game to display changes to.
+	buffer = create_bitmap_ex(32, SCREEN_W, SCREEN_H);                // Creates the buffer for the game to display changes to.
 
 	shipX = SCREEN_W/2;
 	shipY = SCREEN_H/2;
+	ship gameShip;
 
+	blit(background, buffer, 0,0,0,0, background->w, background->h);
+	//draw_trans_sprite(buffer, shipImage, shipX, shipY);
+	
 	while(!key[KEY_ESC])
 	{
-		blit(background, buffer, 0,0,0,0, background->w, background->h);
-		draw_trans_sprite(buffer, ship, shipX, shipY);
-
-		shipY = shipY - 5;
-		shipX = shipX + 5;
-		if(shipY < 1)
-			shipY = 720;
-		if(shipX > 1280)
-			shipX = 0;
+		if(keypressed())
+		{
+			/*if(key[KEY_W])
+				gameShip.goForward(); 
+			if(key[KEY_A])
+				gameShip.turnLeft();
+			if(key[KEY_D])
+				gameShip.turnRight(); */
+			exit(0);
+		}
 
 		acquire_screen();
 		blit(buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
