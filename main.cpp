@@ -1,6 +1,8 @@
 #include <allegro.h>
 #include <math.h>
 #include "ship.h"
+#include <iostream>
+using namespace std;
 int main(void){
 	 
 	BITMAP *background;
@@ -16,9 +18,9 @@ int main(void){
 	{
 		allegro_message("Error! Can not set graphic mode!"); 
 		exit(0);
-	}	
+	}
 
-	background = load_bitmap("background.bmp", NULL);
+	background = load_tga("background.tga", NULL);
 	if (!background)                                                  // Attempts to load the background image.
 	{
 		allegro_message("Error! Unable to load background!");

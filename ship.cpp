@@ -1,13 +1,15 @@
+#define _USE_MATH_DEFINES
 #include <math.h>
 #include "ship.h"
 #include <allegro.h>
-
+#include <iostream>
+using namespace std;
 ship::ship()
 {
-	
 	shipX = SCREEN_W/2;
 	shipY = SCREEN_H/2;
 	angle = 0;
+	speedMult = 2.5;
 
 	shipImage = load_tga("ship3.tga", NULL);
 	if (!shipImage)                                                        // Attempts to load the ship image.
@@ -15,7 +17,6 @@ ship::ship()
 		allegro_message("Error! Unable to load ship!");
 		exit(0);
 	}
-	temp = create_bitmap(shipImage -> w, shipImage -> h);
 }
 void ship::refreshShip(BITMAP *background, BITMAP *buffer)
 {
@@ -34,21 +35,25 @@ void ship::refreshShip(BITMAP *background, BITMAP *buffer)
 }
 void ship::turnLeft()
 {
-	angle -= 8;
+	angle -= 4;
 	if(angle < 0)
 		angle = 256;
 }
 
 void ship::turnRight()
 {
-	angle += 8;
+	angle += 4;
 	if(angle > 256)
 		angle = 0;
 }
 
 void ship::goForward()
 {
-   shipY -= 1;
-}
+   /* Convert the angle to radians */
+	float radAngle = (((angle) / 256.0) * 360.0) * (M_PI/180.0);
+	/* Makes the ship move based on direction, with the constant number representing the speedmultiplier. */
+	shipX +=  sin(radAngle) * 3;
+	shipY +=  -(cos(radAngle) * 3);
 
+}
 ship::~ship(){}

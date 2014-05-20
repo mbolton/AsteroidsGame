@@ -1,4 +1,6 @@
 #include <allegro.h>
+#include <math.h>
+#include <iostream>
 
 class ship
 {
@@ -12,9 +14,8 @@ class ship
 
 	private:
 	BITMAP *shipImage;
-	BITMAP *temp;
 	int angle;
-	int shipX;
-	int shipY;
-	
+	float shipX;
+	float shipY;
+	float speedMult;
 };
