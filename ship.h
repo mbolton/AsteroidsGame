@@ -5,9 +5,9 @@ class ship
 	public: 
 	ship();
 	void refreshShip(BITMAP *background, BITMAP *buffer);
-	void turnLeft(BITMAP* buffer);
-	//void turnRight();
-	//void goForward();
+	void turnLeft();
+	void turnRight();
+	void goForward();
 	~ship();
 
 	private:

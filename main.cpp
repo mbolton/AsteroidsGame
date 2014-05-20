@@ -1,4 +1,4 @@
-#include <allegro.h>	
+#include <allegro.h>
 #include <math.h>
 #include "ship.h"
 int main(void){
@@ -29,18 +29,17 @@ int main(void){
 	ship gameShip;
 
 	blit(background, buffer, 0,0,0,0, background->w, background->h);
-	//draw_trans_sprite(buffer, gameShip.shipImage, shipX, shipY);
 	
 	while(!key[KEY_ESC])
 	{
 		if(keypressed())
 		{
-			/*if(key[KEY_W])
-				gameShip.goForward(); */
+			if(key[KEY_W])
+				gameShip.goForward(); 
 			if(key[KEY_A])
-				gameShip.turnLeft(buffer);
-			/*if(key[KEY_D])
-				gameShip.turnRight(); */
+				gameShip.turnLeft();
+			if(key[KEY_D])
+				gameShip.turnRight(); 
 		} 
 		
 		gameShip.refreshShip(background, buffer);

@@ -1,6 +1,6 @@
-#include <allegro.h>	
 #include <math.h>
 #include "ship.h"
+#include <allegro.h>
 
 ship::ship()
 {
@@ -15,7 +15,7 @@ ship::ship()
 		allegro_message("Error! Unable to load ship!");
 		exit(0);
 	}
-	temp = create_bitmap(shipImage-> w, shipImage ->h);
+	temp = create_bitmap(shipImage -> w, shipImage -> h);
 }
 void ship::refreshShip(BITMAP *background, BITMAP *buffer)
 {
@@ -29,28 +29,26 @@ void ship::refreshShip(BITMAP *background, BITMAP *buffer)
 	if(shipY > SCREEN_H)
 		shipY = 0;
 
-	draw_trans_sprite(buffer, shipImage, shipX, shipY);
-	draw_trans_sprite(buffer, temp, 0, 0);
+	stretch_blit(background, buffer, 0, 0, background->w, background->h, 0, 0, SCREEN_W, SCREEN_H); // Resets the screen.
+	rotate_sprite_trans(buffer, shipImage, shipX, shipY, itofix(angle));
 }
-void ship::turnLeft(BITMAP *buffer)
+void ship::turnLeft()
 {
-
-	clear_to_color(temp, bitmap_mask_color(temp));
-	rotate_sprite(temp, shipImage, 0, 0, 64);
-	draw_trans_sprite(buffer, temp, shipX, shipY);
+	angle -= 8;
+	if(angle < 0)
+		angle = 256;
 }
 
-/*void ship::turnRight()
+void ship::turnRight()
 {
-	angle++;
+	angle += 8;
 	if(angle > 256)
 		angle = 0;
-	rotate_sprite(buffer, shipImage, 1280, 720, itofix(angle));
 }
 
 void ship::goForward()
 {
-
-}*/
+   shipY -= 1;
+}
 
 ship::~ship(){}
