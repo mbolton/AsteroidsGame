@@ -6,7 +6,6 @@ class laser
 	public:
 	laser(int angle, float shipX, float shipY);
 	void refreshLaser(BITMAP *background, BITMAP* buffer);
-	int checkAlive();
 	~laser();
 
 	private:
@@ -14,6 +13,5 @@ class laser
 	float laserX;
 	float laserY;
 	int laserAngle;
-	int limit;
-	int alive;
+	int laserSpeed;
 };

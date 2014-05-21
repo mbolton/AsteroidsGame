@@ -9,7 +9,6 @@ ship::ship()
 {
 	shipX = SCREEN_W/2;
 	shipY = SCREEN_H/2;
-
 	angle = 0;
 	speedMult = 3;
 
@@ -56,6 +55,7 @@ void ship::goForward()
 	shipX +=  sin(radAngle) * speedMult;
 	shipY +=  -(cos(radAngle) * speedMult);
 }
+
 float ship::getShipX()
 {
 	return shipX;
@@ -67,14 +67,5 @@ float ship::getShipY()
 int ship::getShipAngle()
 {
 	return angle;
-}
-void ship::fireBullet(BITMAP *background, BITMAP *buffer)
-{
-	/*float bulletX = shipX;
-	float bulletY = shipY;
-	float radAngle = (((angle) / 256.0) * 360.0) * (M_PI/180.0);
-	bulletX +=  sin(radAngle) * speedMult;
-	bulletY +=  -(cos(radAngle) * speedMult);
-	rotate_sprite(buffer, laserImage, bulletX, bulletY, itofix(angle)); */
 }
 ship::~ship(){}

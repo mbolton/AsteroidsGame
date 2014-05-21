@@ -12,10 +12,10 @@ class ship
 	void turnLeft();
 	void turnRight();
 	void goForward();
+	/** Allows main to get the necessary information about the ship. */
 	float getShipX();
 	float getShipY();
 	int getShipAngle();
-	void fireBullet(BITMAP *background, BITMAP *buffer);
 	~ship();
 
 	private:
@@ -24,5 +24,4 @@ class ship
 	float shipX;
 	float shipY;
 	float speedMult;
-	
 };

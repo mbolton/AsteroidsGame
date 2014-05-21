@@ -10,8 +10,7 @@ laser::laser(int angle, float shipX, float shipY)
 	laserX = shipX;
 	laserY = shipY;
 	laserAngle = angle;
-	limit = 0;
-	alive = 1;
+	laserSpeed = 8;
 
 	laserImage = load_bmp("laser.bmp", NULL);
 	if (!laserImage)                                                        // Attempts to load the ship image.
@@ -22,9 +21,7 @@ laser::laser(int angle, float shipX, float shipY)
 }
 void laser::refreshLaser(BITMAP *background, BITMAP *buffer)
 {
-	//if(limit > 30)
-		//alive = 0;
-	/* Makes the laser wrap around the map instead of going off of the screen */
+	/* ***Removed for now*** Makes the laser wrap around the map instead of going off of the screen */
 	/*if(laserX < 0)
 		laserX = SCREEN_W;
 	if(laserX > SCREEN_W)
@@ -35,15 +32,10 @@ void laser::refreshLaser(BITMAP *background, BITMAP *buffer)
 		laserY = 0; */
 
 	float radAngle = (((laserAngle) / 256.0) * 360.0) * (M_PI/180.0);
-	/* Makes the ship move based on direction, with the constant number representing the speedmultiplier. */
-	laserX +=  sin(radAngle) * 8;
-	laserY +=  -(cos(radAngle) * 8);
+	/* Makes the laser move based on direction, with the constant number representing the speedmultiplier. */
+	laserX +=  sin(radAngle) * laserSpeed;
+	laserY +=  -(cos(radAngle) * laserSpeed);
 
 	rotate_sprite(buffer, laserImage, laserX, laserY, itofix(laserAngle));
-	limit++;
-}
-int laser::checkAlive()
-{
-	return alive;
 }
 laser::~laser(){}

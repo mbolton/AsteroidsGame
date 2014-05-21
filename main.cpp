@@ -11,6 +11,8 @@ int main(void){
 
 	list<laser> laserList;
 	list<laser>::iterator iter;
+	int limit = 0;       // Helps limit firing speed.
+	int laserSpeed = 20; // Higher means slower firing speed.
 	/*** Initialized the program and creates a window with the set background ***/
 	allegro_init();
 	install_keyboard();
@@ -32,7 +34,6 @@ int main(void){
 	ship gameShip;
 
 	buffer = create_bitmap_ex(32, SCREEN_W, SCREEN_H);                // Creates the buffer for the game to display changes to.
-
 	blit(background, buffer, 0,0,0,0, background->w, background->h);
 	
 	while(!key[KEY_ESC])
@@ -47,7 +48,14 @@ int main(void){
 			if(key[KEY_D])
 				gameShip.turnRight();
 			if(key[KEY_SPACE])
-				laserList.push_back(*new laser(gameShip.getShipAngle(), gameShip.getShipX(), gameShip.getShipY()));
+			{
+				if(limit == laserSpeed) // Makes the limit iterate through being called a number of times before firing, to limit the firing speed.
+				{
+					laserList.push_back(*new laser(gameShip.getShipAngle(), gameShip.getShipX(), gameShip.getShipY()));
+					limit = 0;
+				}
+				limit++;
+			}
 		} 		
 		iter = laserList.begin();
 		
@@ -56,8 +64,6 @@ int main(void){
 		{
 			laser& temp = *iter;
 			temp.refreshLaser(background, buffer);
-			if(temp.checkAlive() == false)
-				laserList.erase(iter);
 			iter++;
 		}
 		
