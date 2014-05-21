@@ -1,13 +1,16 @@
 #include <allegro.h>
 #include <math.h>
+#include <list>
 #include "ship.h"
-#include <iostream>
+#include "laser.h"
+
 using namespace std;
 int main(void){
-	 
 	BITMAP *background;
 	BITMAP *buffer;
 
+	list<laser> laserList;
+	list<laser>::iterator iter;
 	/*** Initialized the program and creates a window with the set background ***/
 	allegro_init();
 	install_keyboard();
@@ -26,14 +29,15 @@ int main(void){
 		allegro_message("Error! Unable to load background!");
 		exit(0);
 	}
-	buffer = create_bitmap_ex(32, SCREEN_W, SCREEN_H);                // Creates the buffer for the game to display changes to.
-
 	ship gameShip;
+
+	buffer = create_bitmap_ex(32, SCREEN_W, SCREEN_H);                // Creates the buffer for the game to display changes to.
 
 	blit(background, buffer, 0,0,0,0, background->w, background->h);
 	
 	while(!key[KEY_ESC])
 	{
+		stretch_blit(background, buffer, 0, 0, background->w, background->h, 0, 0, SCREEN_W, SCREEN_H);	
 		if(keypressed())
 		{
 			if(key[KEY_W])
@@ -41,10 +45,22 @@ int main(void){
 			if(key[KEY_A])
 				gameShip.turnLeft();
 			if(key[KEY_D])
-				gameShip.turnRight(); 
-		} 
+				gameShip.turnRight();
+			if(key[KEY_SPACE])
+				laserList.push_back(*new laser(gameShip.getShipAngle(), gameShip.getShipX(), gameShip.getShipY()));
+		} 		
+		iter = laserList.begin();
 		
 		gameShip.refreshShip(background, buffer);
+		while(iter != laserList.end())
+		{
+			laser& temp = *iter;
+			temp.refreshLaser(background, buffer);
+			if(temp.checkAlive() == false)
+				laserList.erase(iter);
+			iter++;
+		}
+		
 		acquire_screen();
 		blit(buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
 		release_screen();

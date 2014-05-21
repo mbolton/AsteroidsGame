@@ -1,7 +1,9 @@
 #include <allegro.h>
 #include <math.h>
-#include <iostream>
+#include <list>
 
+
+using namespace std;
 class ship
 {
 	public: 
@@ -10,6 +12,10 @@ class ship
 	void turnLeft();
 	void turnRight();
 	void goForward();
+	float getShipX();
+	float getShipY();
+	int getShipAngle();
+	void fireBullet(BITMAP *background, BITMAP *buffer);
 	~ship();
 
 	private:
@@ -18,4 +24,5 @@ class ship
 	float shipX;
 	float shipY;
 	float speedMult;
+	
 };

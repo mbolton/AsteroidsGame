@@ -11,10 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="laser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ship.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="laser.h" />
     <ClInclude Include="ship.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
