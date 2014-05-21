@@ -1,8 +1,5 @@
 #define _USE_MATH_DEFINES
-#include <math.h>
 #include "ship.h"
-#include <allegro.h>
-#include <list>
 
 using namespace std;
 ship::ship()

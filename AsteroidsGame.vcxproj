@@ -11,11 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="asteroid.cpp" />
     <ClCompile Include="laser.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ship.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="asteroid.h" />
     <ClInclude Include="laser.h" />
     <ClInclude Include="ship.h" />
   </ItemGroup>

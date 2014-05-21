@@ -1,15 +1,16 @@
-﻿Build started 5/21/2014 11:45:26 AM.
+﻿Build started 5/21/2014 2:01:03 PM.
      1>Project "C:\Users\Marcus\AsteroidsGame\AsteroidsGame.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
-         Touching "Release\AsteroidsGame.unsuccessfulbuild".
+         Creating "Release\AsteroidsGame.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _WINDOWS /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\marcus\asteroidsgame\main.cpp(76): warning C4715: '_mangled_main' : not all control paths return a value
+     1>c:\users\marcus\asteroidsgame\main.cpp(93): warning C4715: '_mangled_main' : not all control paths return a value
        ManifestResourceCompile:
          All outputs are up-to-date.
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Marcus\AsteroidsGame\Release\AsteroidsGame.exe" /INCREMENTAL /NOLOGO "allegro-4.4.2-md.lib" /MANIFEST /ManifestFile:"Release\AsteroidsGame.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Marcus\AsteroidsGame\Release\AsteroidsGame.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Marcus\AsteroidsGame\Release\AsteroidsGame.lib" /MACHINE:X86 Release\AsteroidsGame.exe.embed.manifest.res
+         Release\asteroid.obj
          Release\laser.obj
          Release\main.obj
          Release\ship.obj
@@ -27,4 +28,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.33
+Time Elapsed 00:00:00.35

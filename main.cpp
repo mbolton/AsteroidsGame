@@ -3,16 +3,23 @@
 #include <list>
 #include "ship.h"
 #include "laser.h"
+#include "asteroid.h"
 
 using namespace std;
 int main(void){
 	BITMAP *background;
 	BITMAP *buffer;
 
+	int limit = 0;       // Helps limit firing speed.
+	int laserSpeed = 20; // Higher means slower firing speed
+	int asteroidNum = 15;
+
 	list<laser> laserList;
 	list<laser>::iterator iter;
-	int limit = 0;       // Helps limit firing speed.
-	int laserSpeed = 20; // Higher means slower firing speed.
+
+	list<asteroid> asteroidList;
+	list<asteroid>::iterator asteroidIter; 
+
 	/*** Initialized the program and creates a window with the set background ***/
 	allegro_init();
 	install_keyboard();
@@ -36,6 +43,10 @@ int main(void){
 	buffer = create_bitmap_ex(32, SCREEN_W, SCREEN_H);                // Creates the buffer for the game to display changes to.
 	blit(background, buffer, 0,0,0,0, background->w, background->h);
 	
+	/* Creates the specified number of asteroids. */
+	for(int n = 0; n < asteroidNum; n++)
+		asteroidList.push_back(*new asteroid());
+
 	while(!key[KEY_ESC])
 	{
 		stretch_blit(background, buffer, 0, 0, background->w, background->h, 0, 0, SCREEN_W, SCREEN_H);	
@@ -58,8 +69,15 @@ int main(void){
 			}
 		} 		
 		iter = laserList.begin();
+		asteroidIter = asteroidList.begin();
 		
 		gameShip.refreshShip(background, buffer);
+		while(asteroidIter != asteroidList.end())
+		{
+			asteroid& tempAsteroid = *asteroidIter;
+			tempAsteroid.refreshAsteroid(background,buffer);
+			asteroidIter++;
+		}
 		while(iter != laserList.end())
 		{
 			laser& temp = *iter;

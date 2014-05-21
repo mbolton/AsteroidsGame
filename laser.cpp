@@ -1,8 +1,6 @@
 #define _USE_MATH_DEFINES
-#include <math.h>
 #include "laser.h"
 #include "ship.h"
-#include <allegro.h>
 
 using namespace std;
 laser::laser(int angle, float shipX, float shipY)

@@ -24,12 +24,18 @@
     <ClCompile Include="laser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="asteroid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ship.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="laser.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="asteroid.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
