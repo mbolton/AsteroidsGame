@@ -11,6 +11,7 @@ class ship
 	void turnLeft();
 	void turnRight();
 	void goForward();
+	void gameOver();
 	/** Allows main to get the necessary information about the ship. */
 	float getShipX();
 	float getShipY();

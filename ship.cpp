@@ -53,6 +53,12 @@ void ship::goForward()
 	shipY +=  -(cos(radAngle) * speedMult);
 }
 
+void ship::gameOver()
+{
+	allegro_message("Game over! Try again!");
+	exit(0);
+}
+
 float ship::getShipX()
 {
 	return shipX;

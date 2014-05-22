@@ -19,21 +19,19 @@ laser::laser(int angle, float shipX, float shipY)
 }
 void laser::refreshLaser(BITMAP *background, BITMAP *buffer)
 {
-	/* ***Removed for now*** Makes the laser wrap around the map instead of going off of the screen */
-	/*if(laserX < 0)
-		laserX = SCREEN_W;
-	if(laserX > SCREEN_W)
-		laserX = 0;
-	if(laserY < 0)
-		laserY = SCREEN_H;
-	if(laserY > SCREEN_H)
-		laserY = 0; */
-
 	float radAngle = (((laserAngle) / 256.0) * 360.0) * (M_PI/180.0);
-	/* Makes the laser move based on direction, with the constant number representing the speedmultiplier. */
+	/* Makes the laser move based on direction, with the constant number representing the speed multiplier. */
 	laserX +=  sin(radAngle) * laserSpeed;
 	laserY +=  -(cos(radAngle) * laserSpeed);
 
 	rotate_sprite(buffer, laserImage, laserX, laserY, itofix(laserAngle));
+}
+float laser::getLaserX()
+{
+	return laserX;
+}
+float laser::getLaserY()
+{
+	return laserY;
 }
 laser::~laser(){}

@@ -37,6 +37,15 @@ void asteroid::refreshAsteroid(BITMAP *background, BITMAP *buffer)
 	asteroidX +=  sin(radAngle) * asteroidSpeed;
 	asteroidY +=  -(cos(radAngle) * asteroidSpeed);
 
-	rotate_sprite_trans(buffer, asteroidImage, asteroidX, asteroidY, itofix(asteroidAngle));
+	rotate_sprite(buffer, asteroidImage, asteroidX, asteroidY, itofix(asteroidAngle));
 }
+float asteroid::getAsteroidX()
+{
+	return asteroidX;
+}
+float asteroid::getAsteroidY()
+{
+	return asteroidY;
+}
+
 asteroid::~asteroid(){}

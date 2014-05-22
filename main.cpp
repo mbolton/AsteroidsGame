@@ -1,6 +1,7 @@
 #include <allegro.h>
 #include <math.h>
 #include <list>
+#include <sstream>
 #include "ship.h"
 #include "laser.h"
 #include "asteroid.h"
@@ -10,15 +11,19 @@ int main(void){
 	BITMAP *background;
 	BITMAP *buffer;
 
+	int score = 0;       // The score based on how many asteroids you have destroyed, each asteroid destroyed is with 1 point.
 	int limit = 0;       // Helps limit firing speed.
 	int laserSpeed = 20; // Higher means slower firing speed
-	int asteroidNum = 15;
-
+	int asteroidNum = 0;
+	int maxSpawn = 15;
+	
 	list<laser> laserList;
 	list<laser>::iterator iter;
 
 	list<asteroid> asteroidList;
 	list<asteroid>::iterator asteroidIter; 
+
+	list<laser>::iterator collisionIter;
 
 	/*** Initialized the program and creates a window with the set background ***/
 	allegro_init();
@@ -44,8 +49,6 @@ int main(void){
 	blit(background, buffer, 0,0,0,0, background->w, background->h);
 	
 	/* Creates the specified number of asteroids. */
-	for(int n = 0; n < asteroidNum; n++)
-		asteroidList.push_back(*new asteroid());
 
 	while(!key[KEY_ESC])
 	{
@@ -67,24 +70,53 @@ int main(void){
 				}
 				limit++;
 			}
-		} 		
+		} 	
+		if((asteroidNum < maxSpawn))
+		{
+				asteroidList.push_back(*new asteroid());
+				asteroidNum++;
+		}
 		iter = laserList.begin();
 		asteroidIter = asteroidList.begin();
 		
 		gameShip.refreshShip(background, buffer);
-		while(asteroidIter != asteroidList.end())
-		{
-			asteroid& tempAsteroid = *asteroidIter;
-			tempAsteroid.refreshAsteroid(background,buffer);
-			asteroidIter++;
-		}
+
+		/* Refresh loop for the lasers */
 		while(iter != laserList.end())
 		{
 			laser& temp = *iter;
 			temp.refreshLaser(background, buffer);
 			iter++;
 		}
-		
+
+		/* Refresh loop for the asteroids, also doing collision detection */
+		while(asteroidIter != asteroidList.end())
+		{
+			asteroid& tempAsteroid = *asteroidIter;
+			tempAsteroid.refreshAsteroid(background,buffer);
+			if((gameShip.getShipX() + 39 > tempAsteroid.getAsteroidX()) && (gameShip.getShipX() < tempAsteroid.getAsteroidX() + 39) && (gameShip.getShipY() + 39 > tempAsteroid.getAsteroidY()) && (gameShip.getShipY() < tempAsteroid.getAsteroidY() + 39))
+			{
+				asteroidIter = asteroidList.erase(asteroidIter);
+				asteroidNum--;
+				gameShip.gameOver();
+			}
+			collisionIter = laserList.begin();
+			while(collisionIter != laserList.end())
+			{
+				laser& temp2 = *collisionIter;
+				if((temp2.getLaserX() > tempAsteroid.getAsteroidX()) && (temp2.getLaserX() < tempAsteroid.getAsteroidX() + 78) && (temp2.getLaserY() > tempAsteroid.getAsteroidY()) && (temp2.getLaserY() < tempAsteroid.getAsteroidY() + 78))
+				{
+					tempAsteroid.~asteroid();
+					asteroidIter = asteroidList.erase(asteroidIter);
+					collisionIter = laserList.erase(collisionIter);
+					asteroidNum--;
+					score++;
+				}
+				collisionIter++;
+			}
+			asteroidIter++;
+		}
+		textprintf_ex(buffer, font, 10, 10, makecol(255, 255, 255), -1, "Score: %d", score);
 		acquire_screen();
 		blit(buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
 		release_screen();
