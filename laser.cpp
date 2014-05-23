@@ -3,19 +3,14 @@
 #include "ship.h"
 
 using namespace std;
-laser::laser(int angle, float shipX, float shipY)
+laser::laser(BITMAP *img, int angle, float shipX, float shipY)
 {
+	laserImage = img;
+
 	laserX = shipX;
 	laserY = shipY;
 	laserAngle = angle;
 	laserSpeed = 8;
-
-	laserImage = load_bmp("laser.bmp", NULL);
-	if (!laserImage)                                                        // Attempts to load the ship image.
-	{
-		allegro_message("Error! Unable to load ship!");
-		exit(0);
-	}
 }
 void laser::refreshLaserLogic()
 {

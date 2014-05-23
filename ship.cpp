@@ -2,7 +2,7 @@
 #include "ship.h"
 
 using namespace std;
-ship::ship()
+ship::ship(BITMAP* img)
 {
 	shipX = SCREEN_W/2;
 	shipY = SCREEN_H/2;
@@ -10,12 +10,7 @@ ship::ship()
 	speedMult = 3;
 	reset = false;
 
-	shipImage = load_tga("ship.tga", NULL);
-	if (!shipImage)                                                        // Attempts to load the ship image.
-	{
-		allegro_message("Error! Unable to load ship!");
-		exit(0);
-	}
+	shipImage = img;
 }
 void ship::refreshShipLogic()
 {

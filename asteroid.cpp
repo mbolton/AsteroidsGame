@@ -2,7 +2,7 @@
 #include "asteroid.h"
 
 using namespace std;
-asteroid::asteroid()
+asteroid::asteroid(BITMAP *img)
 {
 	dead = 0;
 	asteroidX = rand() % (SCREEN_W - 80);
@@ -13,12 +13,7 @@ asteroid::asteroid()
 	{
 		asteroidX += 200;
 	}
-	asteroidImage = load_tga("asteroid.tga", NULL);
-	if (!asteroidImage)                                         // Attempts to load the ship image.
-	{
-		allegro_message("Error! Unable to load asteroid!");
-		exit(0);
-	}
+	asteroidImage = img;
 }
 void asteroid::refreshAsteroidLogic()
 {

@@ -6,7 +6,7 @@ using namespace std;
 class ship
 {
 	public: 
-	ship();
+	ship(BITMAP *img);
 	void refreshShipLogic();
 	void refreshShipGraphic(BITMAP *background, BITMAP *buffer);
 	void turnLeft();
