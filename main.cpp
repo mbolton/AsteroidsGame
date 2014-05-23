@@ -25,7 +25,7 @@ int main(void){
 	int limit = 0;       // Helps limit firing speed.
 	int laserSpeed = 20; // Higher means slower firing speed
 	int asteroidNum = 0;
-	int maxSpawn = 20;
+	int maxSpawn = 50;
 	
 	
 	list<laser> laserList;
@@ -108,7 +108,7 @@ int main(void){
 			} 	
 			if((asteroidNum < maxSpawn))
 			{
-					asteroidList.push_back(*new asteroid(asteroidImage));
+				asteroidList.push_back(*new asteroid(asteroidImage, gameShip.getShipX(), gameShip.getShipY()));
 					asteroidNum++;
 			}
 			iter = laserList.begin();

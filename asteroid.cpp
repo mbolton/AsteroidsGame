@@ -2,14 +2,16 @@
 #include "asteroid.h"
 
 using namespace std;
-asteroid::asteroid(BITMAP *img)
+asteroid::asteroid(BITMAP *img, float x, float y)
 {
+	shipX = x;
+	shipY = y;
 	dead = 0;
 	asteroidX = rand() % (SCREEN_W - 80);
 	asteroidY = rand() % (SCREEN_H - 80);
 	asteroidAngle = rand() % 256;
 	asteroidSpeed = rand() % 4 + 1;
-	if ((asteroidX > SCREEN_W/2 - 200) && (asteroidX < SCREEN_W/2 + 200)  && (asteroidY > SCREEN_H/2 -200) && (asteroidY < SCREEN_H + 200))
+	if ((asteroidX > shipX - 200) && (asteroidX < shipX + 200)  && (asteroidY > shipY -200) && (asteroidY < shipY + 200))
 	{
 		asteroidX += 200;
 	}

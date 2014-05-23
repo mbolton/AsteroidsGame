@@ -6,7 +6,7 @@ using namespace std;
 class asteroid
 {
 	public:
-	asteroid(BITMAP *img);
+	asteroid(BITMAP *img, float x, float y);
 	void refreshAsteroidLogic();
 	void refreshAsteroidGraphic(BITMAP *background, BITMAP *buffer);
 	float getAsteroidX();
@@ -18,6 +18,8 @@ class asteroid
 	int dead;
 	float asteroidX;
 	float asteroidY;
+	float shipX;
+	float shipY;
 	int asteroidAngle;
 	int asteroidSpeed;
 };
