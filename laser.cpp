@@ -17,13 +17,15 @@ laser::laser(int angle, float shipX, float shipY)
 		exit(0);
 	}
 }
-void laser::refreshLaser(BITMAP *background, BITMAP *buffer)
+void laser::refreshLaserLogic()
 {
 	float radAngle = (((laserAngle) / 256.0) * 360.0) * (M_PI/180.0);
 	/* Makes the laser move based on direction, with the constant number representing the speed multiplier. */
 	laserX +=  sin(radAngle) * laserSpeed;
 	laserY +=  -(cos(radAngle) * laserSpeed);
-
+}
+void laser::refreshLaserGraphic(BITMAP *background, BITMAP *buffer)
+{
 	rotate_sprite(buffer, laserImage, laserX, laserY, itofix(laserAngle));
 }
 float laser::getLaserX()

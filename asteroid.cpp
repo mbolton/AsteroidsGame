@@ -20,8 +20,7 @@ asteroid::asteroid()
 		exit(0);
 	}
 }
-
-void asteroid::refreshAsteroid(BITMAP *background, BITMAP *buffer)
+void asteroid::refreshAsteroidLogic()
 {
 	if(asteroidX < 0)
 		asteroidX = SCREEN_W;
@@ -36,7 +35,9 @@ void asteroid::refreshAsteroid(BITMAP *background, BITMAP *buffer)
 	/* Makes the laser move based on direction, with the constant number representing the speedmultiplier. */
 	asteroidX +=  sin(radAngle) * asteroidSpeed;
 	asteroidY +=  -(cos(radAngle) * asteroidSpeed);
-
+}
+void asteroid::refreshAsteroidGraphic(BITMAP *background, BITMAP *buffer)
+{
 	rotate_sprite_trans(buffer, asteroidImage, asteroidX, asteroidY, itofix(asteroidAngle));
 }
 float asteroid::getAsteroidX()

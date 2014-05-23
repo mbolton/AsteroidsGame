@@ -7,7 +7,8 @@ class ship
 {
 	public: 
 	ship();
-	void refreshShip(BITMAP *background, BITMAP *buffer);
+	void refreshShipLogic();
+	void refreshShipGraphic(BITMAP *background, BITMAP *buffer);
 	void turnLeft();
 	void turnRight();
 	void goForward();
@@ -24,4 +25,5 @@ class ship
 	float shipX;
 	float shipY;
 	float speedMult;
+	bool reset;
 };

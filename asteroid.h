@@ -7,7 +7,8 @@ class asteroid
 {
 	public:
 	asteroid();
-	void refreshAsteroid(BITMAP *background, BITMAP *buffer);
+	void refreshAsteroidLogic();
+	void refreshAsteroidGraphic(BITMAP *background, BITMAP *buffer);
 	float getAsteroidX();
 	float getAsteroidY();
 	~asteroid();

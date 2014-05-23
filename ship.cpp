@@ -8,16 +8,16 @@ ship::ship()
 	shipY = SCREEN_H/2;
 	angle = 0;
 	speedMult = 3;
+	reset = false;
 
-	shipImage = load_tga("ship3.tga", NULL);
+	shipImage = load_tga("ship.tga", NULL);
 	if (!shipImage)                                                        // Attempts to load the ship image.
 	{
 		allegro_message("Error! Unable to load ship!");
 		exit(0);
 	}
 }
-
-void ship::refreshShip(BITMAP *background, BITMAP *buffer)
+void ship::refreshShipLogic()
 {
 	/* Makes the ship wrap around the map instead of going off of the screen */
 	if(shipX < 0)
@@ -28,7 +28,9 @@ void ship::refreshShip(BITMAP *background, BITMAP *buffer)
 		shipY = SCREEN_H;
 	if(shipY > SCREEN_H)
 		shipY = 0;
-
+}
+void ship::refreshShipGraphic(BITMAP *background, BITMAP *buffer)
+{
 	rotate_sprite_trans(buffer, shipImage, shipX, shipY, itofix(angle));
 }
 void ship::turnLeft()

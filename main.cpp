@@ -7,6 +7,13 @@
 #include "asteroid.h"
 
 using namespace std;
+
+volatile int speedCounter = 0;
+static void speedCounterUpdater()
+{
+	speedCounter++;
+}
+END_OF_STATIC_FUNCTION(speedCounterUpdater);
 int main(void){
 	BITMAP *background;
 	BITMAP *buffer;
@@ -17,16 +24,20 @@ int main(void){
 	int asteroidNum = 0;
 	int maxSpawn = 15;
 	
+	
 	list<laser> laserList;
 	list<laser>::iterator iter;
+	list<laser>::iterator iter2;
 
 	list<asteroid> asteroidList;
-	list<asteroid>::iterator asteroidIter; 
+	list<asteroid>::iterator asteroidIter;
+	list<asteroid>::iterator asteroidIter2;  
 
 	list<laser>::iterator collisionIter;
 
 	/*** Initialized the program and creates a window with the set background ***/
 	allegro_init();
+	install_timer();
 	install_keyboard();
 	set_color_depth(32);
 	set_alpha_blender();
@@ -48,79 +59,101 @@ int main(void){
 	buffer = create_bitmap_ex(32, SCREEN_W, SCREEN_H);                // Creates the buffer for the game to display changes to.
 	blit(background, buffer, 0,0,0,0, background->w, background->h);
 	
-	/* Creates the specified number of asteroids. */
-
+	LOCK_FUNCTION(speedCounterUpdate);
+	LOCK_VARIABLE(speedCounter);
+	install_int_ex(speedCounterUpdater, BPS_TO_TIMER(60));
+	
 	while(!key[KEY_ESC])
-	{
-		stretch_blit(background, buffer, 0, 0, background->w, background->h, 0, 0, SCREEN_W, SCREEN_H);	
-		if(keypressed())
+	{	
+		while(speedCounter > 0)
 		{
-			if(key[KEY_W])
-				gameShip.goForward(); 
-			if(key[KEY_A])
-				gameShip.turnLeft();
-			if(key[KEY_D])
-				gameShip.turnRight();
-			if(key[KEY_SPACE])
+			if(keypressed())
 			{
-				if(limit == laserSpeed) // Makes the limit iterate through being called a number of times before firing, to limit the firing speed.
+				if(key[KEY_W])
+					gameShip.goForward(); 
+				if(key[KEY_A])
+					gameShip.turnLeft();
+				if(key[KEY_D])
+					gameShip.turnRight();
+				if(key[KEY_SPACE])
 				{
-					laserList.push_back(*new laser(gameShip.getShipAngle(), gameShip.getShipX(), gameShip.getShipY()));
-					limit = 0;
+					if(limit == laserSpeed) // Makes the limit iterate through being called a number of times before firing, to limit the firing speed.
+					{
+						laserList.push_back(*new laser(gameShip.getShipAngle(), gameShip.getShipX(), gameShip.getShipY()));
+						limit = 0;
+					}
+					limit++;
 				}
-				limit++;
-			}
-		} 	
-		if((asteroidNum < maxSpawn))
-		{
-				asteroidList.push_back(*new asteroid());
-				asteroidNum++;
-		}
-		iter = laserList.begin();
-		asteroidIter = asteroidList.begin();
-		
-		gameShip.refreshShip(background, buffer);
-
-		/* Refresh loop for the lasers */
-		while(iter != laserList.end())
-		{
-			laser& temp = *iter;
-			temp.refreshLaser(background, buffer);
-			iter++;
-		}
-
-		/* Refresh loop for the asteroids, also doing collision detection */
-		while(asteroidIter != asteroidList.end())
-		{
-			asteroid& tempAsteroid = *asteroidIter;
-			tempAsteroid.refreshAsteroid(background,buffer);
-			if((gameShip.getShipX() + 39 > tempAsteroid.getAsteroidX()) && (gameShip.getShipX() < tempAsteroid.getAsteroidX() + 39) && (gameShip.getShipY() + 39 > tempAsteroid.getAsteroidY()) && (gameShip.getShipY() < tempAsteroid.getAsteroidY() + 39))
+			} 	
+			if((asteroidNum < maxSpawn))
 			{
-				asteroidIter = asteroidList.erase(asteroidIter);
-				asteroidNum--;
-				gameShip.gameOver();
+					asteroidList.push_back(*new asteroid());
+					asteroidNum++;
 			}
-			collisionIter = laserList.begin();
-			while(collisionIter != laserList.end())
+			iter = laserList.begin();
+			asteroidIter = asteroidList.begin();
+
+			gameShip.refreshShipLogic();
+			/* Refresh loop for the lasers */
+			while(iter != laserList.end())
 			{
-				laser& temp2 = *collisionIter;
-				if((temp2.getLaserX() > tempAsteroid.getAsteroidX()) && (temp2.getLaserX() < tempAsteroid.getAsteroidX() + 78) && (temp2.getLaserY() > tempAsteroid.getAsteroidY()) && (temp2.getLaserY() < tempAsteroid.getAsteroidY() + 78))
+				laser& temp = *iter;
+				temp.refreshLaserLogic();
+				iter++;
+			}
+			/* Refresh loop for the asteroids, also doing collision detection */
+			while(asteroidIter != asteroidList.end())
+			{
+				asteroid& tempAsteroid = *asteroidIter;
+				tempAsteroid.refreshAsteroidLogic();
+				if((gameShip.getShipX() + 39 > tempAsteroid.getAsteroidX()) && (gameShip.getShipX() < tempAsteroid.getAsteroidX() + 39) && (gameShip.getShipY() + 39 > tempAsteroid.getAsteroidY()) && (gameShip.getShipY() < tempAsteroid.getAsteroidY() + 39))
 				{
-					tempAsteroid.~asteroid();
 					asteroidIter = asteroidList.erase(asteroidIter);
-					collisionIter = laserList.erase(collisionIter);
 					asteroidNum--;
-					score++;
+					gameShip.gameOver();
 				}
-				collisionIter++;
+				collisionIter = laserList.begin();
+				while(collisionIter != laserList.end())
+				{
+					laser& temp2 = *collisionIter;
+					if((temp2.getLaserX() > tempAsteroid.getAsteroidX()) && (temp2.getLaserX() < tempAsteroid.getAsteroidX() + 78) && (temp2.getLaserY() > tempAsteroid.getAsteroidY()) && (temp2.getLaserY() < tempAsteroid.getAsteroidY() + 78))
+					{
+						tempAsteroid.~asteroid();
+						asteroidIter = asteroidList.erase(asteroidIter);
+						collisionIter = laserList.erase(collisionIter);
+						asteroidNum--;
+						score++;
+					}
+					collisionIter++; 
+				} 
+				asteroidIter++;
 			}
-			asteroidIter++;
+			speedCounter--;
+		}
+
+		iter2 = laserList.begin();
+		asteroidIter2 = asteroidList.begin();
+		
+		stretch_blit(background, buffer, 0, 0, background->w, background->h, 0, 0, SCREEN_W, SCREEN_H);	
+		gameShip.refreshShipGraphic(background, buffer);
+		/* Graphic Refresh loop for the lasers */
+		while(iter2 != laserList.end())
+		{
+			laser& temp2 = *iter2;
+			temp2.refreshLaserGraphic(background, buffer);
+			iter2++;
+		}
+		/* Graphic refresh loop for the asteroids. */
+		while(asteroidIter2 != asteroidList.end())
+		{
+			asteroid& tempAsteroid2 = *asteroidIter2;
+			tempAsteroid2.refreshAsteroidGraphic(background,buffer);
+			asteroidIter2++;
 		}
 		textprintf_ex(buffer, font, 10, 10, makecol(255, 255, 255), -1, "Score: %d", score);
 		acquire_screen();
 		blit(buffer, screen, 0,0,0,0, SCREEN_W, SCREEN_H);
 		release_screen();
-		rest(10);
-	}	 
+	}
 }   
 END_OF_MAIN();  

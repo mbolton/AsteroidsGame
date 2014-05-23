@@ -5,7 +5,8 @@ class laser
 {
 	public:
 	laser(int angle, float shipX, float shipY);
-	void refreshLaser(BITMAP *background, BITMAP* buffer);
+	void refreshLaserLogic();
+	void refreshLaserGraphic(BITMAP *background, BITMAP* buffer);
 	float getLaserX();
 	float getLaserY();
 	~laser();
