@@ -11,7 +11,7 @@ asteroid::asteroid(BITMAP *img, float x, float y)
 	asteroidY = rand() % (SCREEN_H - 80);
 	asteroidAngle = rand() % 256;
 	asteroidSpeed = rand() % 4 + 1;
-	if ((asteroidX > shipX - 200) && (asteroidX < shipX + 200)  && (asteroidY > shipY -200) && (asteroidY < shipY + 200))
+	if ((asteroidX > shipX - 200) && (asteroidX < shipX + 200)  && (asteroidY > shipY - 200) && (asteroidY < shipY + 200))
 	{
 		asteroidX += 200;
 	}

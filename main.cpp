@@ -45,7 +45,7 @@ int main(void){
 	set_color_depth(32);
 	set_alpha_blender();
 
-	if (set_gfx_mode(GFX_AUTODETECT_FULLSCREEN, 1920, 1080, 0, 0) != 0)  // Attempts to set the graphic mode.
+	if (set_gfx_mode(GFX_AUTODETECT_WINDOWED, 1400, 1050, 0, 0) != 0)  // Attempts to set the graphic mode.
 	{
 		allegro_message("Error! Can not set graphic mode!"); 
 		exit(0);
@@ -83,7 +83,7 @@ int main(void){
 	LOCK_FUNCTION(speedCounterUpdate);
 	LOCK_VARIABLE(speedCounter);
 	install_int_ex(speedCounterUpdater, BPS_TO_TIMER(60));
-	
+
 	while(!key[KEY_ESC])
 	{	
 		while(speedCounter > 0)
@@ -110,7 +110,7 @@ int main(void){
 			{
 				asteroidList.push_back(*new asteroid(asteroidImage, gameShip.getShipX(), gameShip.getShipY()));
 					asteroidNum++;
-			}
+			} 
 			iter = laserList.begin();
 			asteroidIter = asteroidList.begin();
 
@@ -127,7 +127,7 @@ int main(void){
 			{
 				asteroid& tempAsteroid = *asteroidIter;
 				tempAsteroid.refreshAsteroidLogic();
-				if((gameShip.getShipX() + 40 > tempAsteroid.getAsteroidX()) && (gameShip.getShipX() < tempAsteroid.getAsteroidX() + 40) && (gameShip.getShipY() + 40 > tempAsteroid.getAsteroidY()) && (gameShip.getShipY() < tempAsteroid.getAsteroidY() + 40))
+				if((gameShip.getShipX() + 42 > tempAsteroid.getAsteroidX()) && (gameShip.getShipX() < tempAsteroid.getAsteroidX() + 78) && (gameShip.getShipY() + 42 > tempAsteroid.getAsteroidY()) && (gameShip.getShipY() < tempAsteroid.getAsteroidY() + 78))
 				{
 					asteroidIter = asteroidList.erase(asteroidIter);
 					asteroidNum--;
