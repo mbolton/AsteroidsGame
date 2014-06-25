@@ -11,15 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="asteroid.cpp" />
-    <ClCompile Include="laser.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="ship.cpp" />
+    <ClCompile Include="Source\asteroid.cpp" />
+    <ClCompile Include="Source\laser.cpp" />
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\ship.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="asteroid.h" />
-    <ClInclude Include="laser.h" />
-    <ClInclude Include="ship.h" />
+    <ClInclude Include="Source\asteroid.h" />
+    <ClInclude Include="Source\laser.h" />
+    <ClInclude Include="Source\ship.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <Keyword>Win32Proj</Keyword>
