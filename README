@@ -1,1 +1,1 @@
-This will be a simple game based on the original ASTEROIDS game for the Atari.
+A simple version of the classic Asteroids game created for the ATARI. This version was created using the Allegro 4.4.2 library, and is currently in a functional beta stage. Fixes are intended and will periodically be added during spare available time.

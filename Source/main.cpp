@@ -14,6 +14,7 @@ static void speedCounterUpdater()
 	speedCounter++;
 }
 END_OF_STATIC_FUNCTION(speedCounterUpdater);
+
 int main(void){
 	BITMAP *background;
 	BITMAP *buffer;
@@ -28,7 +29,7 @@ int main(void){
 	int limit = 0;       // Helps limit firing speed.
 	int laserSpeed = 20; // Higher means slower firing speed
 	int asteroidNum = 0;
-	int maxSpawn = 18;
+	int maxSpawn = 20;
 	
 	
 	list<laser> laserList;
@@ -58,6 +59,9 @@ int main(void){
 		allegro_message("Unable to initialise sound!");
 		exit(0);
 	}
+
+	/* Loading of the images used for the title screen */
+ 
 
 	background = load_tga("data/image/background.tga", NULL);
 	if (!background)                                                  // Attempts to load the background image.
@@ -102,12 +106,19 @@ int main(void){
 	buffer = create_bitmap_ex(32, SCREEN_W, SCREEN_H);                // Creates the buffer for the game to display changes to.
 	blit(background, buffer, 0,0,0,0, background->w, background->h);
 	
+	//while(!key[KEY_ENTER])
+	//{
+		
+		//textout_centre_ex(screen, font, "By Marcus Bolton",SCREEN_W/2, 6*SCREEN_H/8, RED , -1 );
+	//}
+
 	LOCK_FUNCTION(speedCounterUpdate);
 	LOCK_VARIABLE(speedCounter);
 	install_int_ex(speedCounterUpdater, BPS_TO_TIMER(60));
-
+	/* Loop to play the game. */
 	while(!key[KEY_ESC])
 	{	
+		//textout_centre_ex(screen, font, "Asteroids",SCREEN_W/2, SCREEN_H/8, makecol(255,0,0) , -1 );
 		while(speedCounter > 0)
 		{
 			if(keypressed())
